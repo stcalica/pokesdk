@@ -1,34 +1,42 @@
-# **PokeAPI SDK**
+# **PokéSDK**
 
-A Python SDK for accessing Pokémon data from [PokeAPI](https://pokeapi.co). 
+PokéSDK is a Python SDK designed to simplify interactions with the [PokéAPI](https://pokeapi.co), enabling developers to effortlessly access and manage Pokémon data.
+
+---
 
 ## **Installation**
 
 ### **Prerequisites**
-- Python 3.11
+
+- Python 3.11 or higher
 - `pip` for dependency management
 
 ### **Steps**
-1. Clone this repository:
+
+1. **Clone the Repository:**
+
    ```bash
-   git clone https://github.com/yourusername/pokeapi-sdk.git
+   git clone https://github.com/stcalica/pokesdk.git
    cd pokesdk
    ```
 
-2. Install the required dependencies:
+2. **Install Dependencies:**
+
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Verify the installation by running the test script:
+3. **Verify Installation:**
+
    ```bash
    pytest
    ```
 
+---
+
 ## **Usage**
 
 ### **1. Initialize the Client**
-The `PokeClient` is your gateway to interacting with the PokeAPI.
 
 ```python
 from poke.client import PokeClient
@@ -36,28 +44,28 @@ from poke.client import PokeClient
 client = PokeClient()
 ```
 
-### **2. Fetch a Pokémon by Name or ID**
-Retrieve details about a Pokémon, including its abilities, types, and moves.
+### **2. Fetch Pokémon Details**
+
+Retrieve information about a specific Pokémon:
 
 ```python
 clefairy = client.get_pokemon("clefairy")
-print(f"Pokemon Name: {clefairy.name}")
+print(f"Pokémon Name: {clefairy.name}")
 print(f"Abilities: {[ability.ability.name for ability in clefairy.abilities]}")
 ```
 
-### **3. Fetch a Generation by Name or ID**
-Get details about a specific Pokémon generation.
+### **3. Fetch Generation Details**
+
+Retrieve information about a specific Pokémon generation:
 
 ```python
 gen1 = client.get_generation(1)
 print(f"Generation Name: {gen1.name}")
 ```
 
-### **4. Handle Errors Gracefully**
-The SDK raises custom exceptions for common errors:
-- `PokeAPINetworkError`: Network-related issues
-- `PokeAPIResponseError`: Issues with API responses (e.g., 404 Not Found)
-- `PokeAPIError`: General errors
+### **4. Handle Errors**
+
+The SDK raises custom exceptions for error handling:
 
 ```python
 try:
@@ -70,22 +78,31 @@ except PokeAPIError as e:
 
 ## **Testing**
 
-### **Run the Test Script**
-A simple test script is provided in the `/tests` folder. To run it:
+To run the test suite:
+
 ```bash
 pytest
 ```
 
+Ensure all tests pass to confirm the SDK is functioning correctly.
+
+---
+
 ## **Design Decisions for Developer Experience**
 
-### **Critical Design Features**
-1. **Lazy Loading with `NamedAPIResource`**:
-   - Related resources (e.g., abilities, moves) are fetched only when accessed.
-   - Improves performance by reducing unnecessary API calls.
+### **1. Lazy Loading with `NamedAPIResource`**
 
-2. **Custom Exceptions**:
-   - `PokeAPINetworkError`, `PokeAPIResponseError`, and `PokeAPIError` make error handling intuitive and meaningful for developers.
-   - Prevents exposing raw URLs or internal API details, improving security and clarity.
+- Related resources (e.g., abilities, moves) are fetched only when accessed, reducing unnecessary API calls and improving performance.
 
-3. **Modular Code Structure**:
-   - The project is split into separate files for the client, models, and exceptions, making it easier to maintain and extend.
+### **2. Custom Exceptions**
+
+- The SDK defines specific exceptions (`PokeAPIError`, `PokeAPINetworkError`, `PokeAPIResponseError`) to provide clear and meaningful error messages, enhancing the developer experience.
+
+### **3. Modular Structure**
+
+- The codebase is organized into distinct modules (`client`, `models`, `exceptions`) to promote maintainability and scalability.
+
+
+## **License**
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
